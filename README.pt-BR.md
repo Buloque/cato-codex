@@ -1,4 +1,12 @@
-# CATO: Claude Adaptive Token Optimizer
+# CATO para Codex (prévia)
+
+Este fork, [Buloque/cato-codex](https://github.com/Buloque/cato-codex), adiciona uma adaptação local para Codex, mantendo os arquivos originais do Claude Code e a licença. Consulte o [guia de instalação Codex](INSTALL.md), a [matriz de compatibilidade](COMPATIBILITY.md), a [arquitetura](ARCHITECTURE.md) e os [benchmarks](BENCHMARKS.md). A versão atual não reivindica economia de tokens: ela mede eventos oficiais best-effort quando disponíveis.
+
+Para ver as estatísticas medidas: `pnpm cato stats`. O Codex não permite registrar `/cato-stats` por este plugin; esse comando é a alternativa CLI.
+
+---
+
+# CATO: Claude Adaptive Token Optimizer (implementação original)
 
 [![M8ven Score](https://m8ven.ai/badge/mcp/marcusaguiarmaciel-cmd-cato-plugin-y76n7y)](https://m8ven.ai/mcp/marcusaguiarmaciel-cmd-cato-plugin-y76n7y?s=readme)
 [![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/marcusaguiarmaciel-cmd/badge.svg)](https://hub.xerj.org/contributors/marcusaguiarmaciel-cmd)

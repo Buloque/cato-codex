@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "PostModelRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${PLUGIN_ROOT}/dist/hooks/post-model-request.js\"",
+            "timeout": 5,
+            "statusMessage": "Recording measured token usage"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "^Bash$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${PLUGIN_ROOT}/dist/hooks/post-tool-use.js\"",
+            "timeout": 8,
+            "statusMessage": "Observing supported local tool results"
+          }
+        ]
+      }
+    ]
+  }
+}
