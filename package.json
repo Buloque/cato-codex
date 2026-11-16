@@ -1,0 +1,28 @@
+{
+  "name": "cato-codex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "node --test packages/core/test/*.test.mjs packages/codex-adapter/test/*.test.mjs packages/cli/test/*.test.mjs",
+    "test:integration": "node --test packages/mcp-server/test/*.test.mjs",
+    "test": "pnpm run typecheck && pnpm run build && pnpm run test:unit && pnpm run test:integration",
+    "cato": "tsx packages/cli/src/index.ts"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "@types/node": "24.19.2",
+    "esbuild": "0.28.2",
+    "smol-toml": "1.9.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "zod": "4.6.7"
+  }
+}

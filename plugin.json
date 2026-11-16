@@ -1,0 +1,39 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "cato-codex",
+  "version": "0.1.0",
+  "description": "Efficient code navigation and privacy-minimized, best-effort Codex usage reports.",
+  "author": {
+    "name": "Buloque"
+  },
+  "repository": "https://github.com/Buloque/cato-codex",
+  "license": "LicenseRef-MIT-Commons-Clause",
+  "keywords": [
+    "codex",
+    "token-optimization",
+    "code-navigation",
+    "mcp",
+    "agent-skill"
+  ],
+  "extensions": {
+    "com.openai": {
+      "hooks": "./hooks/hooks.json",
+      "interface": {
+        "displayName": "CATO for Codex",
+        "shortDescription": "Efficient code navigation and local usage reports",
+        "longDescription": "CATO adapts repository navigation and privacy-minimized usage reporting for Codex. It provides focused repository tools and records documented token usage fields when Codex exposes them.",
+        "developerName": "Buloque",
+        "category": "Developer tools",
+        "capabilities": ["Read", "Analyze"],
+        "websiteURL": "https://github.com/Buloque/cato-codex",
+        "privacyPolicyURL": "https://github.com/Buloque/cato-codex/blob/feature/codex-support/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/Buloque/cato-codex/blob/feature/codex-support/README.pt-BR.md",
+        "defaultPrompt": [
+          "Use CATO to navigate this repository efficiently.",
+          "Show the measured Codex token usage available to CATO."
+        ],
+        "brandColor": "#2176FF"
+      }
+    }
+  }
+}

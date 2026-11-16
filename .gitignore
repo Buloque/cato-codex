@@ -3,3 +3,8 @@ plugin/.claude-plugin/types/
 node_modules/
 # Resultados locais das evals (custo e traces de cada execução)
 plugin/evals/results/
+node_modules/
+dist/
+.cache/
+coverage/
+*.tsbuildinfo
