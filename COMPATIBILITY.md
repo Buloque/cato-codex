@@ -4,7 +4,7 @@ Status verificado em 16/11/2026; revise contra as versões usadas antes de distr
 
 | Capacidade CATO original | Codex | Implementação neste fork |
 |---|---|---|
-| Orientação de navegação e leitura precisa | Nativa via Agent Skills e MCP | `skills/cato-efficiency` e seis ferramentas MCP |
+| Orientação de navegação e leitura precisa | Nativa via Agent Skills e MCP | `skills/cato-efficiency` e cinco ferramentas MCP |
 | Mapa, símbolos e buscas | Parcialmente equivalente | Reuso de utilitários puros; ast-grep é opcional, fallback local |
 | Compressão de saída de ferramenta | Hook local PostToolUse pode devolver feedback após executar ação | Ainda não portada; hook permanece observacional |
 | Métricas de tokens | PostModelRequest best-effort por tentativa | Ledger local com campos desconhecidos como `null`; retries contam como requests separados |
