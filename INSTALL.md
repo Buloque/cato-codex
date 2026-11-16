@@ -20,6 +20,15 @@ pnpm cato install "C:\caminho\do\projeto"
 
 Isso cria/mescla `.codex/config.toml`, preserva uma cópia datada se o arquivo existia e configura o MCP com Node, servidor compilado e raiz absoluta. O parser preserva valores TOML, mas comentários/formatação podem mudar; o backup contém o original. Reinicie Codex e confirme a confiança do projeto. `pnpm cato uninstall "C:\caminho\do\projeto"` remove só a entrada `[mcp_servers.cato]` e também cria backup.
 
+Para habilitar a Skill e os hooks do marketplace do repositório, o `.codex/config.toml` do projeto também precisa conter:
+
+```toml
+[plugins."cato-codex@cato-codex-local"]
+enabled = true
+```
+
+O checkout CATO já declara essa ativação no projeto de desenvolvimento. O Codex só lê configurações `.codex/config.toml` de projetos confiáveis. No Codex Desktop, abra **Plugins → Pessoal**, selecione ou adicione o marketplace local do repositório e instale **CATO for Codex**. Revise a definição dos hooks antes de confiar neles: os scripts são executados localmente. `pnpm cato install` configura o MCP por projeto; não altera silenciosamente configurações globais de marketplaces/plugins.
+
 Para instalar a Skill e hooks como plugin local pelo CLI:
 
 ```powershell
@@ -27,7 +36,7 @@ codex plugin marketplace add "C:\caminho\do\checkout\cato-codex"
 codex plugin add cato-codex --marketplace cato-codex-local
 ```
 
-O marketplace do repositório também é descoberto pelo Codex Desktop quando o projeto é aberto. Revise e aceite a execução local/hook quando solicitado. A instalação MCP pelo comando acima é independente do marketplace.
+O marketplace do repositório é descoberto pelo Codex Desktop quando o projeto é aberto. Revise e aceite a execução local/hook quando solicitado. A instalação MCP pelo comando acima é independente do plugin do marketplace.
 
 ## Comandos
 

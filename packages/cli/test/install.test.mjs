@@ -10,7 +10,7 @@ test('install and uninstall preserve existing settings and create reversible bac
   try {
     const codex = path.join(root, '.codex')
     await (await import('node:fs/promises')).mkdir(codex)
-    const original = 'model = "gpt-test"\n[mcp_servers.other]\ncommand = "other"\n'
+    const original = 'model = "gpt-test"\n[mcp_servers.other]\ncommand = "other"\n[plugins."cato-codex@cato-codex-local"]\nenabled = true\n'
     await writeFile(path.join(codex, 'config.toml'), original)
     const run = command => spawnSync(process.execPath, ['dist/cli/index.js', command, root], { encoding: 'utf8' })
     const installed = run('install')
@@ -19,6 +19,8 @@ test('install and uninstall preserve existing settings and create reversible bac
     assert.match(config, /gpt-test/)
     assert.match(config, /mcp_servers\.other/)
     assert.match(config, /mcp_servers\.cato/)
+    assert.match(config, /plugins\."cato-codex@cato-codex-local"/)
+    assert.match(config, /enabled = true/)
     assert.ok((await readdir(codex)).some(name => name.includes('cato-backup')))
     const configured = run('config')
     assert.equal(configured.status, 0, configured.stderr)
@@ -35,6 +37,7 @@ test('install and uninstall preserve existing settings and create reversible bac
     config = await readFile(path.join(codex, 'config.toml'), 'utf8')
     assert.match(config, /mcp_servers\.other/)
     assert.doesNotMatch(config, /mcp_servers\.cato/)
+    assert.match(config, /plugins\."cato-codex@cato-codex-local"/)
     assert.ok((await readdir(codex)).filter(name => name.includes('cato-backup')).length >= 2)
 
     const invalid = 'model = [ this is not valid TOML\n'
