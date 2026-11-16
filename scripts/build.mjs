@@ -1,10 +1,19 @@
 import { build } from 'esbuild'
+import { readdir, rm } from 'node:fs/promises'
+
+// Remove known obsolete artifacts from prior preview builds without clearing dist wholesale.
+await Promise.all([
+  rm('dist/hooks/post-compact.js', { force: true }),
+  rm('dist/hooks/post-compact.js.map', { force: true }),
+])
+for (const name of await readdir('dist').catch(() => [])) {
+  if (/^cato-codex-\d+\.\d+\.\d+\.tgz$/.test(name)) await rm(`dist/${name}`, { force: true })
+}
 
 const entries = {
   'mcp-server/index': 'packages/mcp-server/src/index.ts',
   'hooks/post-model-request': 'packages/codex-adapter/src/post-model-request.ts',
   'hooks/post-tool-use': 'packages/codex-adapter/src/post-tool-use.ts',
-  'hooks/post-compact': 'packages/codex-adapter/src/post-compact.ts',
   'cli/index': 'packages/cli/src/index.ts',
 }
 

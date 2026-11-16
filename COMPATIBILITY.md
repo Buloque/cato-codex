@@ -4,12 +4,12 @@ Status verificado em 16/11/2026; revise contra as versões usadas antes de distr
 
 | Capacidade CATO original | Codex | Implementação neste fork |
 |---|---|---|
-| Orientação de navegação e leitura precisa | Nativa via Agent Skills e MCP | `skills/cato-efficiency` e cinco ferramentas MCP |
+| Orientação de navegação e leitura precisa | Nativa via Agent Skills e MCP | `skills/cato-efficiency` e seis ferramentas MCP |
 | Mapa, símbolos e buscas | Parcialmente equivalente | Reuso de utilitários puros; ast-grep é opcional, fallback local |
-| Compressão de saída de ferramenta | Hook local PostToolUse pode devolver feedback após executar ação | Ainda não portada; hook permanece observacional |
+| Compressão de saída de ferramenta | Hook local PostToolUse pode devolver feedback após executar ação | Bash para testes/build/linter reconhecidos; saída bruta pesquisável por ID durante 14 dias; MCP estruturado passa intacto |
 | Métricas de tokens | PostModelRequest best-effort por tentativa | Ledger local com campos desconhecidos como `null`; retries contam como requests separados |
 | Custo monetário/cache misses | Não há campo oficial equivalente acessível ao plugin local | Não calculado nem estimado |
-| Compactação | Codex já compacta a conversa | PostCompact observacional; não interpreta transcript interno instável |
+| Compactação | Codex já compacta a conversa | Usa a compactação nativa; sem leitura de transcript interno instável |
 | Slash commands `/cato...` | Plugins não registram comandos slash arbitrários | `pnpm cato <subcomando>` / `node dist/cli/index.js <subcomando>` |
 | MCP de projeto | Compatível com config TOML de projeto | `cato install` grava apenas `.codex/config.toml` do alvo; raiz absoluta é explícita |
 | Hooks do plugin | Disponíveis com revisão de confiança e instalação explícita | Manifesto aponta para hooks empacotados; autorização e execução devem ser aceitas pelo usuário |

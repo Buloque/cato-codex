@@ -25,6 +25,7 @@ import {
   type Graph,
 } from '../../../plugin/hooks/lib/integrations.ts'
 import { readUsageReport } from '../../core/src/usage.ts'
+import { readCompressionReport, searchSavedOutput } from '../../core/src/output.ts'
 
 const MAX_TOOL_TEXT = 18_000
 const MAX_SINGLE_FILE = 512 * 1024
@@ -387,9 +388,18 @@ async function invokeTool(name: string, args: JsonObject, root: string): Promise
         const graph = await loadGraph(root)
         return toolResult(queryGraph(graph, term, limit, 3000))
       }
+      case 'search_sandbox': {
+        const id = requiredString(args, 'id', 32)
+        const query = requiredString(args, 'query', 300)
+        return toolResult(await searchSavedOutput(getDataDir(), id, query))
+      }
       case 'cost_report': {
-        const report = await readUsageReport(path.join(getDataDir(), 'usage.jsonl'), { now: Date.now() })
-        return toolResult(JSON.stringify(report, null, 2))
+        const dataDir = getDataDir()
+        const [usage, compression] = await Promise.all([
+          readUsageReport(path.join(dataDir, 'usage.jsonl'), { now: Date.now() }),
+          readCompressionReport(dataDir),
+        ])
+        return toolResult(JSON.stringify({ usage, compression }, null, 2))
       }
       default:
         return toolResult(`Unknown tool: ${name}`, true)
@@ -440,6 +450,14 @@ export async function startMcpServer(argv = process.argv.slice(2)): Promise<void
       inputSchema: z.object({ term: z.string().min(1).max(300), limit: z.number().int().min(1).max(50).optional() }),
     },
     args => invokeTool('graph_query', args as JsonObject, root),
+  )
+  server.registerTool(
+    'search_sandbox',
+    {
+      description: 'Search original terminal output saved locally after CATO compressed a recognized verbose test/build/linter command.',
+      inputSchema: z.object({ id: z.string().regex(/^cmd_[a-f0-9]{8}$/), query: z.string().min(1).max(300) }),
+    },
+    args => invokeTool('search_sandbox', args as JsonObject, root),
   )
   server.registerTool(
     'cost_report',

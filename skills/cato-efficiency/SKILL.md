@@ -10,7 +10,7 @@ description: Navigate code repositories efficiently with CATO's MCP tools and bo
 3. Read one symbol with `read_symbol` before loading a whole source file. Use a relative path from the configured repository root.
 4. Check a graph relation with `graph_query` only when Graphify's repository graph exists. Missing optional integrations should not stop the task.
 5. Avoid dependency trees, generated output, lockfiles, secret-like paths, and repeated full-file reads. Use targeted line ranges when the native file tool supports them.
-6. Keep test/build errors and stack traces visible; this preview does not compress or save tool output.
+6. For recognized verbose test/build/linter Bash output, preserve CATO's summary and errors; use `search_sandbox` with the shown ID to find original lines. Other tools pass through unchanged.
 7. Use `cost_report` for measured request counts. Treat null or absent token usage as unavailable, never as zero. Text-size/token estimates are estimates, not measured model usage.
 
 Keep the user's requested files and behavior in view. CATO's tools are optional: continue with native Codex tools when the MCP server or an integration is unavailable.

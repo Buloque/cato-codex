@@ -20,6 +20,13 @@ test('install and uninstall preserve existing settings and create reversible bac
     assert.match(config, /mcp_servers\.other/)
     assert.match(config, /mcp_servers\.cato/)
     assert.ok((await readdir(codex)).some(name => name.includes('cato-backup')))
+    const configured = run('config')
+    assert.equal(configured.status, 0, configured.stderr)
+    assert.match(configured.stdout, /CATO MCP: configured/)
+    assert.match(configured.stdout, /MCP repository root:/)
+    const diagnosis = run('doctor')
+    assert.equal(diagnosis.status, 0, diagnosis.stdout + diagnosis.stderr)
+    assert.match(diagnosis.stdout, /OK Built MCP server/)
     const repeated = run('install')
     assert.notEqual(repeated.status, 0)
     assert.match(repeated.stderr, /already exists/)
@@ -29,5 +36,11 @@ test('install and uninstall preserve existing settings and create reversible bac
     assert.match(config, /mcp_servers\.other/)
     assert.doesNotMatch(config, /mcp_servers\.cato/)
     assert.ok((await readdir(codex)).filter(name => name.includes('cato-backup')).length >= 2)
+
+    const invalid = 'model = [ this is not valid TOML\n'
+    await writeFile(path.join(codex, 'config.toml'), invalid)
+    const rejected = run('install')
+    assert.notEqual(rejected.status, 0)
+    assert.equal(await readFile(path.join(codex, 'config.toml'), 'utf8'), invalid)
   } finally { await rm(root, { recursive: true, force: true }) }
 })

@@ -14,25 +14,13 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "Bash|mcp__.*",
+        "matcher": "^Bash$",
         "hooks": [
           {
             "type": "command",
             "command": "node \"${PLUGIN_ROOT}/dist/hooks/post-tool-use.js\"",
             "timeout": 8,
             "statusMessage": "Observing supported local tool results"
-          }
-        ]
-      }
-    ],
-    "PostCompact": [
-      {
-        "matcher": "manual|auto",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"${PLUGIN_ROOT}/dist/hooks/post-compact.js\"",
-            "timeout": 3
           }
         ]
       }

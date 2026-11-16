@@ -8,7 +8,7 @@
 
 ## Compilar
 
-Na raiz do checkout: `pnpm install --frozen-lockfile` e `pnpm build`.
+Na raiz do checkout: `pnpm install --frozen-lockfile` e `pnpm build`. Para gerar o pacote preview com manifestos, Skill, hooks e bundles já compilados, execute `pnpm package`; o arquivo fica em `dist/cato-codex-0.1.0.tgz`.
 
 ## MCP por projeto
 
@@ -36,9 +36,10 @@ pnpm cato stats
 pnpm cato report
 pnpm cato status
 pnpm cato doctor
+pnpm cato config
 ```
 
-O Codex não oferece registro de slash command arbitrário para este plugin; `cato stats` é a forma CLI de `/cato-stats`. O relatório usa apenas eventos `PostModelRequest` recebidos depois da instalação dos hooks e pode indicar `unavailable`. Não calcula custo monetário, não importa transcripts e não inventa contagens. Compressão automática de saída de ferramentas ainda não está implementada no adaptador Codex.
+O Codex não oferece registro de slash command arbitrário para este plugin; `cato stats` é a forma CLI de `/cato-stats`. O relatório usa apenas eventos `PostModelRequest` recebidos depois da instalação dos hooks e pode indicar `unavailable`. Não calcula custo monetário, não importa transcripts e não inventa contagens. O hook resume somente saídas Bash reconhecidas; a saída original pode conter conteúdo sensível e fica em logs locais por até 14 dias.
 
 ## Dados e privacidade
 

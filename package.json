@@ -5,11 +5,28 @@
   "type": "module",
   "packageManager": "pnpm@11.25.0",
   "license": "SEE LICENSE IN LICENSE",
+  "files": [
+    ".agents/plugins/marketplace.json",
+    "ARCHITECTURE.md",
+    "BENCHMARKS.md",
+    "CHANGELOG.md",
+    "COMPATIBILITY.md",
+    "hooks/**",
+    "INSTALL.md",
+    "LICENSE",
+    "plugin.json",
+    "PRIVACY.md",
+    "README.md",
+    "README.pt-BR.md",
+    "dist/**",
+    "skills/**"
+  ],
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "build": "node scripts/build.mjs",
+    "package": "pnpm run build && pnpm pack --pack-destination dist",
     "typecheck": "tsc --noEmit",
     "test:unit": "node --test packages/core/test/*.test.mjs packages/codex-adapter/test/*.test.mjs packages/cli/test/*.test.mjs",
     "test:integration": "node --test packages/mcp-server/test/*.test.mjs",

@@ -27,7 +27,7 @@
         "capabilities": ["Read", "Analyze"],
         "websiteURL": "https://github.com/Buloque/cato-codex",
         "privacyPolicyURL": "https://github.com/Buloque/cato-codex/blob/feature/codex-support/PRIVACY.md",
-        "termsOfServiceURL": "https://github.com/Buloque/cato-codex/blob/feature/codex-support/README.pt-BR.md",
+        "termsOfServiceURL": "https://github.com/Buloque/cato-codex/blob/feature/codex-support/LICENSE",
         "defaultPrompt": [
           "Use CATO to navigate this repository efficiently.",
           "Show the measured Codex token usage available to CATO."

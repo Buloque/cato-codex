@@ -2,9 +2,11 @@
 
 ## Codex adaptation in this fork
 
-The Codex adapter stores a local JSONL ledger under `%LOCALAPPDATA%\\Cato\\Codex` on Windows or `$XDG_DATA_HOME/cato-codex` on other systems (override with `CATO_DATA_DIR` or `PLUGIN_DATA`). It records documented `PostModelRequest` usage fields when available, model/status/turn/agent metadata, a one-way session hash, and a generic error marker; detailed error text is omitted. Missing usage stays unknown. It does not store prompts, model responses, transcript contents, or session paths. Entries older than 90 days are removed when the ledger is updated.
+The Codex adapter stores data under `%LOCALAPPDATA%\\Cato\\Codex` on Windows or `$XDG_DATA_HOME/cato-codex` on other systems (override with `CATO_DATA_DIR` or `PLUGIN_DATA`). Its `usage.jsonl` records documented `PostModelRequest` usage fields when available, model/status/turn/agent metadata, a one-way session hash, and a generic error marker; detailed error text is omitted. Missing usage stays unknown. It does not store prompts, model responses, transcript contents, or session paths in this ledger. Entries older than 90 days are removed when the ledger is updated.
 
-The MCP server reads source files only under the explicit project root configured during installation. It skips common secret paths, VCS metadata, symlinks and oversized/binary files. Hook scripts run locally when Codex trusts and enables them. No CATO network requests or telemetry are added. You may remove `usage.jsonl` from the data directory at any time.
+When a recognized verbose Bash test/build/linter command is compressed by at least 30%, the original terminal output is stored under `logs/cmd_*.json` for 14 days so `search_sandbox` can retrieve matching lines. Raw tool output may include sensitive data; the log stays local and can be deleted at any time. Commands are not stored. `compressions.jsonl` keeps byte counts and strategy metadata, not the output text.
+
+The MCP server reads source files only under the explicit project root configured during installation. It skips common secret paths, VCS metadata, symlinks and oversized/binary files. Hook scripts run locally when Codex trusts and enables them. No CATO network requests or telemetry are added. You may delete any ledger or log file in the data directory at any time.
 
 The original Claude Code privacy description below continues to describe the upstream adapter, not the Codex ledger.
 
